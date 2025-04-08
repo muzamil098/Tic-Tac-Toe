@@ -1,28 +1,29 @@
 import React, { useState } from "react";
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-export default function GameBoard() {
-  const [gameBoard, setGameBoard] = useState(initialGameBoard);
-  const handleSelectSquare = (rowIndex, colIndex) => {
-    //  Best approach to edit objects or arrays
-    setGameBoard((prevState) => {
-      const updatedGameBoard = [...prevState.map((row) => [...row])];
-      updatedGameBoard[rowIndex][colIndex] = "X";
-      return updatedGameBoard;
-    });
-    // we can mutate the previours arrays and objects directly, but best method is to edit an array's or object's copy rather than orignal one
-    // setGameBoard((prevState) => {
-    //   prevState[rowIndex][colIndex] = "X";
-    //   return prevState;
-    // });
-    console.log(gameBoard);
-  };
+
+export default function GameBoard({ onSelectSquare, playerSymbol, turns. board }) {
+  let gameBoard = initialGameBoard;
+
+  // const [gameBoard, setGameBoard] = useState(initialGameBoard);
+  // const handleSelectSquare = (rowIndex, colIndex) => {
+  //   //  Best approach to edit objects or arrays
+  //   setGameBoard((prevState) => {
+  //     const updatedGameBoard = [
+  //       ...prevState.map((innerArray) => [...innerArray]),
+  //     ];
+  //     updatedGameBoard[rowIndex][colIndex] = playerSymbol;
+  //     return updatedGameBoard;
+  //   });
+  //   // we can mutate the previours arrays and objects directly, but best method is to edit an array's or object's copy rather than orignal one
+  //   // setGameBoard((prevState) => {
+  //   //   prevState[rowIndex][colIndex] = "X";
+  //   //   return prevState;
+  //   // });
+  //   onSelectSquare();
+  // };
+
   return (
     <ol id="game-board">
-      {initialGameBoard.map((row, rowIndex) => {
+      {board.map((row, rowIndex) => {
         return (
           <li key={rowIndex}>
             <ol>
@@ -30,7 +31,8 @@ export default function GameBoard() {
                 return (
                   <li key={colIndex}>
                     <button
-                      onClick={() => handleSelectSquare(rowIndex, colIndex)}
+                      onClick={() => onSelectSquare(rowIndex, colIndex)}
+                      disabled={!!playerSymbol}
                     >
                       {playerSymbol}
                     </button>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-export default function Player({ initialName, symbol }) {
+export default function Player({ initialName, symbol, isActive }) {
   const [isEditing, setIsEditing] = useState(false);
   const [playerName, setPlayerName] = useState(initialName);
   const handleEditClick = () => {
@@ -12,7 +12,7 @@ export default function Player({ initialName, symbol }) {
     // setIsEditing((editing) => !editing); // => This will gain the latest value of the state, returns true
   };
   const onChangeHandler = (e) => {
-    setName(e.target.value);
+    setPlayerName(e.target.value);
   };
   let editablePlayerName = <span className="player-name">{playerName}</span>;
   if (isEditing) {
@@ -26,9 +26,9 @@ export default function Player({ initialName, symbol }) {
     );
   }
   return (
-    <li>
+    <li className={isActive ? "active" : undefined}>
       <span className="player">
-        {playerName}
+        {editablePlayerName}
         <span className="player-symbol">{symbol}</span>
       </span>
       <button onClick={handleEditClick}>{isEditing ? "Save" : "Edit"}</button>

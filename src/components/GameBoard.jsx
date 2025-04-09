@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
-export default function GameBoard({ onSelectSquare, playerSymbol, turns. board }) {
-  let gameBoard = initialGameBoard;
+export default function GameBoard({
+  onSelectSquare,
+  playerSymbol,
+  turns,
+  board,
+}) {
+  // let gameBoard = initialGameBoard;
 
   // const [gameBoard, setGameBoard] = useState(initialGameBoard);
   // const handleSelectSquare = (rowIndex, colIndex) => {
@@ -20,7 +25,7 @@ export default function GameBoard({ onSelectSquare, playerSymbol, turns. board }
   //   // });
   //   onSelectSquare();
   // };
-
+  console.log("GameBoard: " + board);
   return (
     <ol id="game-board">
       {board.map((row, rowIndex) => {
